@@ -1,0 +1,32 @@
+<fp-header-coupon-constructor
+    [marketingPrograms]="marketingPrograms"
+    [status]="getStatus()"
+    [form]="formOffer"
+    (onSetMarketingProgram)="setMarketingProgram($event)">
+</fp-header-coupon-constructor>
+
+<div class="main-content">
+    <div class="constructor-left">
+        <fp-form-coupon-constructor
+            [form]="formOffer"
+            [sampleValues]="sampleValues"
+            [marketingProgram]="selectedMarketingProgram">
+        </fp-form-coupon-constructor>
+    </div>
+
+    <div class="constructor-right">
+        <fp-ids-info-coupon-constructor
+            [form]="formOffer">
+        </fp-ids-info-coupon-constructor>
+
+        <fp-submit-form-coupon-constructor
+            [form]="formOffer"
+            [timeStamp]="timeStamp">
+        </fp-submit-form-coupon-constructor>
+
+        <fp-preview-coupon-constructor
+            [form]="formOffer"
+            [marketingProgram]="selectedMarketingProgram">
+        </fp-preview-coupon-constructor>
+    </div>
+</div>

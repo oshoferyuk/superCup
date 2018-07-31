@@ -1,0 +1,33 @@
+<div class="pagination-wrap">
+    <ngb-pagination [collectionSize]="totalItems"
+                    [maxSize]="3"
+                    [pageSize]="countOnPage || totalItems"
+                    [disabled]="!countOnPage"
+                    [ellipses]="true"
+                    [rotate]="true"
+                    [page]="currentPage + 1"
+                    (pageChange)="onPageChanged($event)">
+    </ngb-pagination>
+
+    <div class="pagination-wrap__select">
+        <md-select class="pagination-counter"
+                   placeholder="Print house extract"
+                   floatPlaceholder="never"
+                   id="pagination-page-size"
+                   name="countOnPage"
+                   [(ngModel)]="countOnPage"
+                   (change)="onCountChange()">
+            <md-option *ngFor="let size of pageSizes"
+                       [value]="size.value">
+                {{ size.name }} items
+            </md-option>
+        </md-select>
+
+        <label class="pagination-wrap__label"
+               for="pagination-page-size">
+            <span [fpTooltip]="'The Marketing Channel to which the offer belongs.'">
+                per page
+            </span>
+        </label>
+    </div>
+</div>

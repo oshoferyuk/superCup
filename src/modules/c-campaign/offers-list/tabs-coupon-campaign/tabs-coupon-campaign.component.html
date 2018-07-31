@@ -1,0 +1,87 @@
+<header class="nav-tabs">
+    <div>
+        <button class="nav-tabs__btn"
+                [ngClass]="{'active': isActiveTab(offerTab.ALL)}"
+                (click)="changeTab(offerTab.ALL)">
+            All Campaigns
+            <span class="nav-tabs__count">{{totalAll}}</span>
+        </button>
+        <button class="nav-tabs__btn"
+                [ngClass]="{'active': isActiveTab(offerTab.DRAFT)}"
+                (click)="changeTab(offerTab.DRAFT)">
+            Draft
+            <span class="nav-tabs__count">{{totalDraft}}</span>
+        </button>
+        <button class="nav-tabs__btn"
+                [ngClass]="{'active': isActiveTab(offerTab.UPCOMING)}"
+                (click)="changeTab(offerTab.UPCOMING)">
+            Upcoming
+            <span class="nav-tabs__count">{{totalUpcoming}}</span>
+        </button>
+        <button class="nav-tabs__btn"
+                [ngClass]="{'active': isActiveTab(offerTab.ACTIVE)}"
+                (click)="changeTab(offerTab.ACTIVE)">
+            Active
+            <span class="nav-tabs__count">{{totalActive}}</span>
+        </button>
+        <button class="nav-tabs__btn"
+                [ngClass]="{'active': isActiveTab(offerTab.EXPIRED)}"
+                (click)="changeTab(offerTab.EXPIRED)">
+            Expired
+            <span class="nav-tabs__count">{{totalExpired}}</span>
+        </button>
+    </div>
+
+    <div class="form-search-wrap">
+        <input class="form-search-wrap__elem"
+               type="search"
+               (keyup.enter)="searchChange(search)"
+               placeholder="Search by Campaign ID"
+               [textMask]="{mask: onlyNumberMask}"
+               #search>
+        <i class="icon-search" (click)="searchChange(search)"></i>
+    </div>
+</header>
+
+<section class="filter-tools">
+    <div class="filter-tools__btns">
+        <button
+            class="btn btn-outline-blue btn-sm"
+            (click)="expandFilters()" >
+
+        <span *ngIf="!isExpanded; else applyFiltersText">
+            <i class="icon-sliders"></i>
+            <span>Filters</span>
+        </span>
+
+            <ng-template #applyFiltersText>
+                <i class="icon-ic-s-cancel"></i>
+                <span>Close</span>
+            </ng-template>
+        </button>
+        <button
+            class="btn btn-primary"
+            (click)="applyFilters()"
+            *ngIf="isShowButton()">
+            <span >Apply Filter</span>
+        </button>
+    </div>
+
+    <div class="filter-tools__wrap">
+        <label class="filter-tools__label" for="select-list"  aria-label>Select Report Type</label>
+        <md-select class="filter-tools__select"
+                   placeholder="Print House Extract"
+                   id="select-list"
+                   floatPlaceholder="never">
+            <md-option *ngFor="let select of selectList" [value]="select.value">
+                {{ select.viewValue }}
+            </md-option>
+        </md-select>
+
+        <button
+            class="btn btn-outline-blue btn-sm"
+            (click)="downloadReport()">
+            <i class="icon-ic-xl"></i> Export
+        </button>
+    </div>
+</section>

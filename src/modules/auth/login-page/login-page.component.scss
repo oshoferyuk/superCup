@@ -1,0 +1,115 @@
+@import '../../../core/scss/vars';
+@import '../../../core/scss/base';
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    border-top: 17px solid $brand-cyan;
+    position: relative;
+    background: url('/assets/img/bkg-login-page.jpg') fixed 50%;
+    background-size: cover;
+
+    .btn-login {
+        width: 206px;
+        font-size: 16px;
+        padding: 16px 0;
+        letter-spacing: .5px;
+    }
+}
+
+.login-header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 30px 0 0 36px;
+}
+
+.login-header__logo {
+    width: 67px;
+    height: 47px;
+    fill: $brand-cyan;
+}
+
+.login-header__title {
+    color: $white;
+    border-left: 1px solid $white;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding-left: 10px;
+    margin-left: 20px;
+    line-height: 30px;
+    display: inline-block;
+    position: relative;
+    top: -18px;
+    letter-spacing: .9px;
+}
+
+.sign-sec {
+    background-color: $white;
+    width: 558px;
+    min-height: 266px;
+    border-radius: 2px;
+    padding: 40px 60px;
+
+    &.login-trigger {
+        width: 518px;
+    }
+}
+
+.sign-btns__title {
+    margin: 0 0 50px;
+    max-width: 260px;
+    line-height: 1.2;
+}
+
+.sign-btns__wrap {
+    display: flex;
+    justify-content: space-between;
+
+    .btn {
+        width: 210px;
+        text-align: center;
+    }
+}
+
+.sign-credentials {
+    strong {
+        font-size: 15px;
+    }
+
+    .btn {
+        float: right;
+    }
+
+    .btn-login {
+        width: 125px;
+        padding: 7px 0;
+        font-size: 14px;
+        letter-spacing: inherit;
+    }
+}
+
+.sign-credentials__title {
+    margin: 6px 0 50px;
+    line-height: 1.2;
+}
+
+.sign-form-section {
+    margin-bottom: 25px;
+
+    input {
+        width: 100%;
+        height: 36px;
+    }
+}
+
+.sign-form-section__label {
+    display: block;
+    font-weight: 600;
+    font-size: 9px;
+    margin-bottom: 10px;
+}

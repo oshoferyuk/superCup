@@ -1,0 +1,15 @@
+<fp-form-control [label]="'listOfProducts'"
+                 [italicLabel]="true"
+                 [tooltipLabel]="'Product Brand Group'">
+
+    <button class="btn btn-outline-blue btn-product-selector"
+            (click)="openProductDialog()">{{'buttons.productSelector' | translate}}</button>
+</fp-form-control>
+
+<ng-content></ng-content>
+
+<fp-products-summary
+    *ngIf="productSummaries"
+    [productSummaries]="productSummaries"
+    (deleteProductSummaryItem)="onDeleteProductSummaryItem($event)">
+</fp-products-summary>

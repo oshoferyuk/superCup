@@ -1,0 +1,55 @@
+@import '../../../../core/scss/vars';
+
+:host {
+    width: 100%;
+
+    .form-search-wrap {
+        width: 298px;
+    }
+}
+
+.nav-tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+}
+
+.filter-tools__wrap {
+    display: flex;
+}
+
+.filter-tools__label {
+    font-weight: 600;
+    line-height: 30px;
+    margin-right: 14px;
+}
+
+.nav-tabs__count {
+    color: $dusty-gray;
+}
+
+.filter-tools {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    .icon-ic-s-cancel {
+        &::before {
+            font-size: 10px;
+            position: relative;
+            top: -2px;
+        }
+    }
+}
+
+.filter-tools__btns {
+    .btn-outline-blue {
+        margin-right: 24px;
+    }
+}
+
+.filter-tools__select {
+    margin-right: 25px;
+    width: 186px;
+}

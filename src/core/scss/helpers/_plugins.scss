@@ -1,0 +1,537 @@
+// Calendar
+.date-picker {
+    height: 30px;
+    position: relative;
+
+    .mydp {
+        border-radius: 2px;
+        border-color: $dusty-gray;
+
+        * {
+            font-family: $source-sans;
+        }
+
+        .icon-mydpcalendar {
+            @extend .icon-calendar-empty;
+        }
+
+        .icon-mydpleft,
+        .icon-mydpup {
+            @extend .icon-angle-left;
+        }
+
+        .icon-mydpright,
+        .icon-mydpdown {
+            @extend .icon-angle-right;
+        }
+
+        .headertodaybtn {
+            @extend .btn;
+            @extend .btn-outline-blue;
+            @extend .btn-extra-sm;
+            border-width: 1px;
+            height: auto;
+            min-width: 0;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+
+        .icon-mydptoday {
+            display: none;
+        }
+
+        .selector {
+            border: 1px solid $dusty-gray;
+            border-radius: 0 0 2px 2px;
+            border-top-color: $neutral-color;
+
+            &:focus {
+                border-color: $neutral-color $dusty-gray $dusty-gray;
+            }
+        }
+
+        .btnpicker {
+            color: $primary-text-color;
+
+            &:hover {
+                background-color: transparent;
+                color: $primary-hover-color;
+            }
+
+            &:focus {
+                background-color: transparent;
+            }
+        }
+
+        .header {
+            border-radius: 0;
+            background-color: $white;
+        }
+
+        .headerbtncell,
+        .headerlabelbtn,
+        .headerbtn,
+        .yearchangebtn {
+            background-color: transparent;
+
+            &:focus {
+                color: inherit;
+            }
+        }
+
+        .headerlabelbtn {
+            font-size: 12px;
+        }
+
+        .icon-mydpleft,
+        .icon-mydpright {
+            font-size: 16px;
+
+            &::before {
+                margin: 0;
+                width: 8px;
+            }
+        }
+
+        .headermonthtxt {
+            max-width: initial;
+            width: auto;
+        }
+
+        .weekdaytitle {
+            background-color: transparent;
+            font-weight: 700;
+            color: $secondary-text-color;
+        }
+
+        .datevalue {
+            font-weight: 600;
+            font-size: 12px;
+            border-radius: 2px;
+
+            span {
+                line-height: 30px;
+                display: block;
+            }
+
+            &:hover {
+                background-color: $brand-blue;
+                color: $white;
+            }
+        }
+
+        .currmonth {
+            color: $primary-text-color;
+            background-color: transparent;
+        }
+
+        .yearcell {
+            line-height: 2;
+            background-color: transparent;
+            color: $primary-text-color;
+
+            &:focus {
+                outline: 0;
+            }
+        }
+
+        .monthcell {
+            background-color: transparent;
+            color: $primary-text-color;
+
+            .monthvalue {
+                &:hover {
+                    border-radius: 2px;
+                    background-color: $brand-blue;
+                    color: $white;
+                }
+            }
+        }
+
+        .disabled {
+            background-color: transparent;
+            color: $neutral-color;
+
+            .datevalue,
+            .monthvalue {
+                color: $neutral-color;
+            }
+
+            &:hover {
+                .datevalue,
+                .monthvalue {
+                    background-color: transparent;
+                }
+            }
+        }
+
+        .daycell,
+        .monthcell,
+        .yearcell {
+            padding: 0;
+        }
+
+        .selectedday,
+        .selectedmonth,
+        .selectedyear {
+            .datevalue,
+            .monthvalue,
+            .yearvalue {
+                background-color: $primary-hover-color;
+                color: $white;
+
+                &:hover {
+                    background-color: $primary-hover-color;
+                }
+            }
+        }
+
+        .yearvalue {
+            &:hover {
+                border-radius: 2px;
+                background-color: $brand-blue;
+                color: $white;
+            }
+        }
+
+        .yearchangebtncell {
+            background-color: transparent;
+        }
+
+        .tablesingleyear {
+            &:hover {
+                background-color: inherit;
+            }
+        }
+
+        .headerbtnenabled,
+        .monthlabel,
+        .yearlabel {
+            &:hover {
+                color: $primary-hover-color;
+            }
+        }
+
+        .caltable,
+        .header,
+        .monthtable {
+            width: 260px;
+            margin: auto;
+        }
+
+        .monthtable,
+        .caltable,
+        .yeartable {
+            height: calc(100% - 60px);
+        }
+
+        .selectorarrow {
+            background-color: $white;
+        }
+
+        .highlight {
+            color: $primary-text-color;
+        }
+
+    }
+
+    &.date-picker-open {
+        .btnpickerenabled {
+            .icon-mydpcalendar {
+                @extend .icon-ic-close;
+                font-size: 10px;
+            }
+        }
+
+        .mydp {
+            width: 280px !important;
+            border-radius: 2px 2px 0 0;
+        }
+
+        ::-webkit-input-placeholder {
+            color: $primary-text-color;
+            text-align: center;
+        }
+
+        ::-moz-placeholder {
+            color: $primary-text-color;
+            text-align: center;
+        }
+
+        :-ms-input-placeholder {
+            color: $primary-text-color;
+            text-align: center;
+        }
+
+        .selection {
+            padding-left: 0;
+            text-align: center;
+        }
+
+        .monthvalue {
+            line-height: 50px;
+        }
+
+        .tablesinglemonth {
+            &.disabled {
+                background-color: transparent;
+
+                .monthvalue {
+                    color: inherit;
+                }
+            }
+        }
+    }
+}
+
+.mydp {
+    .header {
+        padding: 10px 0;
+
+        tr {
+            &:first-child {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 1px 0 7px;
+            }
+        }
+
+        td {
+            display: block;
+
+            &:nth-child(2) {
+                order: -1;
+            }
+        }
+    }
+
+    .selectorarrowleft,
+    .selectorarrowleft {
+        &::before,
+        &::after {
+            display: none;
+        }
+    }
+
+    .selector {
+        &.selectorarrowleft {
+            margin-top: 0;
+        }
+    }
+
+
+}
+
+// Product selector dialog
+.product-selector-modal {
+    .cdk-global-overlay-wrapper {
+        align-items: flex-start !important;
+    }
+
+    .mat-dialog-container {
+        max-width: 98vw;
+        height: auto;
+        background-color: $solution-bg;
+        padding: 20px 20px 40px;
+    }
+
+    .cdk-overlay-pane {
+        margin-top: 80px;
+
+        @media (max-width: $laptop) {
+            margin-top: 30px;
+        }
+
+    }
+}
+
+// Tree component
+.product-selector-list {
+    position: relative;
+
+    tree-node-expander {
+        position: absolute;
+        padding: 0 7px 3px 8px;
+        top: 3px;
+        left: 0;
+    }
+
+    .node-wrapper {
+        align-items: center;
+        position: relative;
+    }
+
+    .node-content-wrapper {
+        flex-grow: 1;
+        padding: 0 10px 0 20px;
+        margin-bottom: 5px;
+
+        &.node-content-wrapper-active {
+            &:hover {
+                background-color: $brand-blue;
+                color: $white;
+            }
+        }
+    }
+
+    .node-content-wrapper-active {
+        &.node-content-wrapper-focused {
+            background-color: $brand-blue;
+            color: $white;
+        }
+    }
+
+    tree-node-content {
+        display: flex;
+        justify-content: space-between;
+
+        .product-selector-list__item {
+            @extend .icon-right-dir;
+
+            &::before {
+                font-family: $icon-fonts;
+                display: inline-block;
+                transition: transform .3s ease-out;
+                color: $brand-blue;
+                position: absolute;
+            }
+
+            &.active {
+                &::before {
+                    transform: rotate(90deg);
+                }
+            }
+
+            & > .product-selector-list {
+                margin-left: 13px;
+            }
+        }
+    }
+
+    .toggle-children-wrapper {
+        @extend .icon-right-dir;
+        padding: 0;
+
+        &::before {
+            font-family: $icon-fonts;
+            display: inline-block;
+            transition: transform .3s ease-out;
+            color: $brand-blue;
+        }
+    }
+
+    .toggle-children-wrapper-expanded {
+        &::before {
+            transform: rotate(90deg);
+        }
+    }
+
+    .toggle-children {
+        display: none;
+    }
+
+    tree-viewport div {
+        overflow: hidden;
+    }
+
+    .tree-node-active {
+        & > tree-node-wrapper .toggle-children-wrapper {
+            &::before {
+                color: $white;
+            }
+        }
+    }
+
+    &.no-selected {
+        tree-node-expander {
+            display: none;
+        }
+
+        .node-content-wrapper {
+            padding-left: 5px;
+        }
+    }
+}
+
+// Select
+.mat-select {
+    font-family: $source-sans;
+    min-width: 188px;
+    border: solid 1px $dusty-gray;
+    height: 30px;
+    border-radius: 2px;
+    padding-top: 0;
+    background-color: $white;
+
+    .mat-select-placeholder,
+    .mat-select-value {
+        padding: 0 0 2px 12px;
+        font-size: 14px;
+    }
+
+    .mat-select-arrow {
+        margin-right: 12px;
+        color: $primary-text-color;
+    }
+
+    &:not(:focus) {
+        &.ng-invalid.ng-touched {
+            &:not(.mat-select-disabled) {
+                .mat-select-trigger,
+                .mat-select-arrow {
+                    color: $primary-text-color;
+                }
+            }
+        }
+    }
+
+    &:focus {
+        &:not(.mat-select-disabled) {
+            .mat-select-arrow,
+            .mat-select-trigger {
+                color: $primary-text-color !important;
+            }
+        }
+    }
+}
+
+.mat-option {
+    font-size: 14px;
+    line-height: 40px;
+    height: 40px;
+    font-family: $source-sans;
+}
+
+.mat-primary {
+    .mat-option {
+        &.mat-selected {
+            color: $brand-blue;
+            background-color: transparent;
+        }
+
+        &:hover {
+            color: $brand-blue;
+            background-color: transparent;
+        }
+
+        &:focus {
+            background-color: transparent;
+        }
+    }
+}
+
+.mat-select-trigger {
+    color: $primary-text-color;
+}
+
+.mat-select-underline {
+    display: none;
+}
+
+.mat-select-panel {
+    box-shadow: none !important;
+    border: 1px solid $dusty-gray;
+}

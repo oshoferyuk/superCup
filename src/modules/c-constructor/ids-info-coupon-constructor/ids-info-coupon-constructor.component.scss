@@ -1,0 +1,44 @@
+@import '../../../core/scss/vars';
+
+.ids-info {
+    margin: 10px 0 40px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid $neutral-color;
+    position: relative;
+
+    .info-item {
+        display: inline-block;
+    }
+
+    .info-item__offer-id {
+        margin-right: 77px;
+    }
+}
+
+.info-hints {
+    position: absolute;
+    right: 0;
+    top: -30px;
+}
+
+.info-hints__title {
+    display: block;
+    color: $brand-blue;
+    font-size: 12px;
+
+    .icon-ic-question-big-lines {
+        display: inline-block;
+        background-color: $picked-bluewood;
+        border-radius: 100%;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        margin-left: 5px;
+        color: darken($white, 20%);
+    }
+}
+
+.info-hints__aside {
+    font-size: 10px;
+    color: $dusty-gray;
+}

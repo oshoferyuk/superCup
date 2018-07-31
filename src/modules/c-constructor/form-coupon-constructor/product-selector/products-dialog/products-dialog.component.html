@@ -1,0 +1,230 @@
+<section class="product-selector">
+    <button md-button  (click)="closeDialog()" class="icon-ic-close btn-cancel"></button>
+
+    <div class="product-selector__container" [ngClass]="{'active' : isCategoryVisible()}">
+        <span class="product-selector__title">Sector/Category: {{totalsGtins.sector}}</span>
+        <div class="product-selector-elements">
+            <div class="form-search-wrap">
+                <input #sector
+                       type="search"
+                       placeholder="Search this segment"
+                       class="form-search-wrap__elem"
+                       [ngClass]="{'input-error': searchFieldHasError.sector}"
+                       (keyup.enter)="onSearchSectors(sector)">
+                <i class="icon-search" (click)="onSearchSectors(sector)"></i>
+
+                <span class="error-message">
+                    {{ 'productSelector.errorMessages.searchFieldLeastThree' | translate }}
+                </span>
+            </div>
+
+            <header class="product-selector-elements__header">
+                <span class="product-selector-elements__title">Name</span>
+                <span class="product-selector-elements__title">Total</span>
+            </header>
+
+        <div class="product-selector-list">
+            <tree-root [nodes]="sectorNodes"
+                       [(state)]="sectorState"
+                       (activate)="onNodeSectorActivated($event)"
+                       (deactivate)="onNodeSectorDeactivated($event)">
+                <ng-template #treeNodeTemplate let-node let-index="index">
+                    <div class="product-selector-list__wrap">
+                        <span class="product-selector-list__title">{{ node.data.name }}</span>
+                        <span class="product-selector-list__total">{{ node.data.count }}</span>
+                    </div>
+                </ng-template>
+            </tree-root>
+        </div>
+
+        </div>
+    </div>
+
+    <div class="product-selector__container" [ngClass]="{'active' : isBrandsVisible()}">
+        <span class="product-selector__title">Brand Group/Brand: {{totalsGtins.brands}}</span>
+        <div class="product-selector-elements">
+            <div class="form-search-wrap">
+                <input #brand
+                       type="search"
+                       placeholder="Search this segment"
+                       class="form-search-wrap__elem"
+                       [ngClass]="{'input-error': searchFieldHasError.brand}"
+                       (keyup.enter)="onSearchBrands(brand)">
+                <i class="icon-search" (click)="onSearchBrands(brand)"></i>
+
+                <span class="error-message">
+                    {{ 'productSelector.errorMessages.searchFieldLeastThree' | translate }}
+                </span>
+            </div>
+
+            <header class="product-selector-elements__header">
+                <span class="product-selector-elements__title">Name</span>
+                <span class="product-selector-elements__title">Total</span>
+            </header>
+
+
+            <div class="product-selector-list">
+                <tree-root [nodes]="brandgroupNodes"
+                           [(state)]="brandgroupState"
+                           (focus)="onNodeBrandGroupFocus($event)"
+                           (activate)="onNodeBrandGroupActivated($event)"
+                           (deactivate)="onNodeBrandGroupDeactivated($event)">
+                    <ng-template #treeNodeTemplate let-node let-index="index">
+                        <div class="product-selector-list__wrap">
+                            <span class="product-selector-list__title">{{ node.data.name }}</span>
+                            <span class="product-selector-list__total">{{ node.data.count }}</span>
+                        </div>
+                    </ng-template>
+                </tree-root>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-selector__container" [ngClass]="{'active' : isSubBrandsVisible()}">
+        <span class="product-selector__title">Sub-Brand: {{totalsGtins.subBrands}}</span>
+        <div class="product-selector-elements">
+            <div class="form-search-wrap">
+                <input #subBrand
+                       type="search"
+                       placeholder="Search this segment"
+                       class="form-search-wrap__elem"
+                       [ngClass]="{ 'input-error': searchFieldHasError.subbrand}"
+                       (keyup.enter)="onSearchSubBrands(subBrand)">
+                <i class="icon-search" (click)="onSearchSubBrands(subBrand)"></i>
+
+                <span class="error-message">
+                    {{ 'productSelector.errorMessages.searchFieldLeastThree' | translate }}
+                </span>
+            </div>
+
+            <header class="product-selector-elements__header">
+                <span class="product-selector-elements__title">Name</span>
+                <span class="product-selector-elements__title">Total</span>
+
+                <!-- On mock this functionality is missing. But may reappear. -->
+
+                <!--<span class="product-selector-elements__title">-->
+                    <!--<input (change)="onToggleAllSubBrands($event)"-->
+                           <!--type="checkbox"-->
+                           <!--[checked]="isAllSubBrandsChecked()"-->
+                           <!--id="all-sub"-->
+                           <!--name="all-sub" />-->
+                    <!--<label for="all-sub"><span class="icon-ok"></span>Name</label>-->
+                <!--</span>-->
+                <!--<span class="product-selector-elements__title">Total</span>-->
+
+                <!-- END: On mock this functionality is missing. -->
+            </header>
+
+            <ul class="product-selector-list no-selected">
+                <li *ngFor="let subBrand of subBrands"
+                    [value]="subBrand.name"
+                    class="product-selector-list__item"
+                    [ngClass]="{'selected': subBrand.isSelected}"
+                    (click)="onToggleSubBrand(subBrands, subBrand)">
+                    <div class="product-selector-list__wrap">
+                        <span class="product-selector-list__title">{{subBrand.name}}</span>
+                        <span class="product-selector-list__total">{{subBrand.count}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="product-selector__container" [ngClass]="{'active' : isVersionsVisible()}">
+        <span class="product-selector__title">Versions: {{totalsGtins.versions}}</span>
+        <div class="product-selector-elements">
+            <div class="form-search-wrap">
+                <input #version
+                       type="search"
+                       placeholder="Search this segment"
+                       class="form-search-wrap__elem"
+                       [ngClass]="{'input-error': searchFieldHasError.version}"
+                       (keyup.enter)="onSearchVersions(version)">
+                <i class="icon-search" (click)="onSearchVersions(version)"></i>
+
+                <span class="error-message">
+                    {{ 'productSelector.errorMessages.searchFieldLeastThree' | translate }}
+                </span>
+            </div>
+
+            <header class="product-selector-elements__header">
+                <span class="product-selector-elements__title">
+                    <input (change)="onToggleAllVersions($event)"
+                           type="checkbox"
+                           [checked]="isAllVersionsChecked()"
+                           id="all-versions"
+                           name="all-versions" />
+                    <label for="all-versions"><span class="icon-ok"></span>Name</label>
+
+                    <span class="error-message">Please enter at least three letters</span>
+                </span>
+                <span class="product-selector-elements__title">Total</span>
+
+            </header>
+
+            <ul class="product-selector-list">
+                <li *ngFor="let version of versions"
+                    [value]="version.name"
+                    class="product-selector-list__item"
+                    [ngClass]="{'selected': version.isSelected}"
+                    (click)="onToggleVersion(versions, version)">
+                    <div class="product-selector-list__wrap">
+                        <span class="product-selector-list__title">{{version.name}}</span>
+                        <span class="product-selector-list__total">{{version.count}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="product-selector__container" [ngClass]="{'active' : isFormsVisible()}">
+        <span class="product-selector__title">Form: {{totalsGtins.form}}</span>
+        <div class="product-selector-elements">
+            <div class="form-search-wrap">
+                <input #sform
+                       type="search"
+                       placeholder="Search this segment"
+                       class="form-search-wrap__elem"
+                       [ngClass]="{'input-error': searchFieldHasError.form}"
+                       (keyup.enter)="onSearchForms(sform)">
+                <i class="icon-search" (click)="onSearchForms(sform)"></i>
+
+                <span class="error-message">
+                    {{ 'productSelector.errorMessages.searchFieldLeastThree' | translate }}
+                </span>
+            </div>
+
+            <header class="product-selector-elements__header">
+                <input type="checkbox"
+                       (change)="onToggleAllForms($event)"
+                       [checked]="isAllFormsChecked()"
+                       id="all-forms"
+                       name="all-forms" />
+                <label for="all-forms"><span class="icon-ok"></span>Name</label>
+                <span class="product-selector-elements__title">Total</span>
+            </header>
+
+            <ul class="product-selector-list">
+                <li *ngFor="let form of forms"
+                    [value]="form.name"
+                    class="product-selector-list__item"
+                    [ngClass]="{'selected': form.isSelected}"
+                    (click)="onToggleForm(forms, form)">
+                    <div class="product-selector-list__wrap">
+                        <span class="product-selector-list__title">{{form.name}}</span>
+                        <span class="product-selector-list__total">{{form.count}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<footer class="product-selector-footer">
+    <span class="product-selector-footer__selected">{{totalsGtins.sum}} Selected</span>
+    <button md-button (click)="closeDialog()" class="btn btn-outline-blue btn-cancel">Cancel</button>
+    <button class="btn btn-primary btn-apply-list"
+            (click)="setDialogResult()"
+            [disabled]="isApplyListDisabled()">Apply List</button>
+</footer>

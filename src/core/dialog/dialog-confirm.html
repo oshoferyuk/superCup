@@ -1,0 +1,28 @@
+<section class="dialog-confirm">
+    <h3 *ngIf="title"
+        class="dialog-confirm__title"
+        translate>
+        {{ title }}
+    </h3>
+
+    <p *ngIf="message"
+       class="dialog-confirm__description"
+       translate>
+        {{ message }}
+    </p>
+
+    <button type="button" md-button
+            class="btn btn-outline-blue"
+            *ngIf="cancel"
+            (click)="close()"
+            translate>
+        {{ cancel }}
+    </button>
+
+    <button type="button" md-raised-button
+            class="btn btn-primary"
+            (click)="confirm()"
+            translate>
+        {{ ok }}
+    </button>
+</section>

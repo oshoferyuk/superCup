@@ -1,0 +1,139 @@
+<div class="form-constructor__distribution" [formGroup]="form">
+    <fp-form-control [label]="offerFields.validityStart"
+                     [control]="form.get(offerFields.validityStart)"
+                     [tooltipLabel]="'The date before which the offer must not be visible to new consumers or available for new reservations.'"
+                     [required]="true">
+
+        <my-date-picker class="date-picker {{dpStartOpen ? 'date-picker-open' : ''}}"
+                        name="validityStart"
+                        placeholder="{{ dpStartOpen ? ('placeholders.startDateHeader' | translate) : ('placeholders.startDate' | translate) }}"
+                        formControlName="{{offerFields.validityStart}}"
+                        [options]="validityStartDatePickerOptions"
+                        (calendarToggle)="calendarStartToggle($event)"
+                        (inputFieldChanged)="onValidityStartChanged($event)">
+        </my-date-picker>
+
+        <input [value]="startTime"
+               [hidden]="true"
+               formControlName="{{offerFields.validityStartTime}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.validityEnd"
+                     [control]="form.get(offerFields.validityEnd)"
+                     [tooltipLabel]="'The date after which the offer must no longer be visible to new consumers or available for new reservations.'"
+                     [required]="true">
+
+        <my-date-picker class="date-picker {{dpEndOpen ? 'date-picker-open' : ''}}"
+                        name="validityEnd"
+                        placeholder="{{ dpEndOpen ? ('placeholders.endDateHeader' | translate) : ('placeholders.endDate' | translate) }}"
+                        formControlName="{{offerFields.validityEnd}}"
+                        [options]="validityEndDatePickerOptions"
+                        (calendarToggle)="calendarEndToggle($event)"
+                        (inputFieldChanged)="onValidityEndChanged($event)">
+        </my-date-picker>
+
+        <input [value]="endTime"
+               [hidden]="true"
+               formControlName="{{offerFields.validityEndTime}}">
+    </fp-form-control>
+
+    <fp-input-switcher [label]="offerFields.targeted"
+                       [fpTooltipText]="'Indicates whether the offer is restricted to a set of Consumer Segments.'"
+                       formControlName="{{offerFields.targeted}}"
+                       (click)="switchTargeted()">
+    </fp-input-switcher>
+
+    <fp-form-control *ngIf="isTargeted()"
+                     [label]="offerFields.targetConsumerSegments"
+                     [control]="form.get(offerFields.targetConsumerSegments)"
+                     [tooltipLabel]="'A list of one or more Segment IDs to which the offer should be made available.'"
+                     [required]="true">
+
+        <fp-multiple-select *ngIf="consumerSegments"
+                            [data]="consumerSegments"
+                            [optionKey]="'id'"
+                            [optionName]="'name'"
+                            placeholder="{{'placeholders.enterSegment' | translate}}"
+                            formControlName="{{offerFields.targetConsumerSegments}}">
+        </fp-multiple-select>
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.redemptionRate"
+                     [control]="form.get(offerFields.redemptionRate)"
+                     [tooltipLabel]="'Estimated Redemption Rate in decimal points. For example, 75% would be input as 0.75.'"
+                     [required]="true">
+
+        <input [textMask]="textMask"
+               placeholder="{{ 'placeholders.enterDecimal' | translate }}"
+               formControlName="{{offerFields.redemptionRate}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.budgetName"
+                     [control]="form.get(offerFields.budgetName)"
+                     [tooltipLabel]="'The name of the budget owner.'">
+
+        <input placeholder="{{'placeholders.budgetName' | translate}}"
+               [id]="offerFields.budgetName"
+               formControlName="{{offerFields.budgetName}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.budgetIONumber"
+                     [control]="form.get(offerFields.budgetIONumber)"
+                     [tooltipLabel]="'The budget IO number.'">
+
+        <input placeholder="{{'placeholders.BudgetIO' | translate}}"
+               [id]="offerFields.budgetIONumber"
+               formControlName="{{offerFields.budgetIONumber}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.lineOfBusiness"
+                     [control]="form.get(offerFields.lineOfBusiness)"
+                     [tooltipLabel]="'Please select between Dosing and Feminine Care'"
+                     [required]="true">
+
+        <md-select class="form-section__select"
+                   formControlName="{{offerFields.lineOfBusiness}}"
+                   floatPlaceholder="never">
+            <md-option *ngFor="let select of lineOfBusiness"
+                       [value]="select.value">
+                {{ select.viewValue }}
+            </md-option>
+        </md-select>
+    </fp-form-control>
+
+
+    <fp-form-control [label]="offerFields.distributionQuantity"
+                     [control]="form.get(offerFields.distributionQuantity)"
+                     [tooltipLabel]="'The maximum number of activations permitted on an offer. Only integers allowed.'"
+                     [required]="true">
+
+        <input placeholder="{{'placeholders.enterLimit' | translate}}"
+               [id]="offerFields.distributionQuantity"
+               [textMask]="{mask: onlyNumberMask}"
+               formControlName="{{offerFields.distributionQuantity}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.samplePartNumber"
+                     [required]="true"
+                     [alignItems]="'flex-start'"
+                     [tooltipLabel]="'The part number of the physical product to be shipped to the consumer.'">
+
+        <input placeholder="{{'placeholders.productsList' | translate}}"
+               [id]="offerFields.samplePartNumber"
+               formControlName="{{offerFields.samplePartNumber}}">
+    </fp-form-control>
+
+    <fp-product-selector [form]="form">
+        <fp-form-control [label]="'sampleGtins'"
+                         [required]="true"
+                         [alignItems]="'flex-start'"
+                         [tooltipLabel]="'A complete list of GTINs (UPCs, EANs) among which a purchase should be made in order to redeem the offer.'">
+
+            <textarea [readonly]="true"
+                      class="full-width"
+                      placeholder="{{'placeholders.productsList' | translate}}"
+                      formControlName="{{offerFields.purchaseGtins}}">
+            </textarea>
+        </fp-form-control>
+    </fp-product-selector>
+</div>

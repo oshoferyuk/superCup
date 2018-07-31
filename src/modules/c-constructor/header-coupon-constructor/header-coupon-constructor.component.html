@@ -1,0 +1,41 @@
+<div class="additional-header additional-header_construct">
+    <div class="additional-header__content">
+        <div class="additional-header__wrapper-title">
+            <button class="btn-back" (click)="navToCampaign()">
+                <span class="icon-angle-left"></span>
+            </button>
+            <h2 class="additional-header__title">Create New Coupon Campaign</h2>
+        </div>
+        <div class="marketing-program">
+            <div class="form-section">
+                <label class="form-section__label"
+                       for="marketing-program">
+                    <span [fpTooltip]="'The Marketing Channel to which the offer belongs.'">
+                        P&G Marketing Program:
+                    </span>
+                </label>
+
+                <md-select class="form-section__select"
+                           [(ngModel)]="selectedMarketingProgram"
+                           (change)="setMarketingProgram()"
+                           floatPlaceholder="never"
+                           id="marketing-program"
+                           [disabled]="isMarketingProgramDisabled()">
+                    <md-option *ngFor="let marketingProgram of marketingPrograms"
+                               [value]="marketingProgram">
+                        {{marketingProgram.name}}
+                    </md-option>
+                </md-select>
+            </div>
+
+            <div class="info-item">
+                <span class="info-item__title">
+                    <span [fpTooltip]="'A unique Marketing Channel identifier.'">
+                        P&G Marketing Program ID:
+                    </span>
+                </span>
+                {{selectedMarketingProgram.id}}
+            </div>
+        </div>
+    </div>
+</div>

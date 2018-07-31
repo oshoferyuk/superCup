@@ -1,0 +1,112 @@
+@import '../../../core/scss/vars';
+
+:host {
+    .icon-ic-monitor,
+    .icon-ic-printable {
+        padding: 0 5px;
+        height: 33px;
+        line-height: 33px;
+        display: inline-block;
+        border-radius: 2px;
+
+        &::before {
+            width: auto;
+            margin: 0;
+        }
+
+        &.active {
+            background-color: $dusty-gray;
+            color: $white;
+            cursor: default;
+
+            &:hover {
+                color: $white;
+            }
+        }
+
+        &:hover {
+            color: $primary-hover-color;
+        }
+    }
+}
+
+.coupon-preview {
+    position: relative;
+    padding: 30px 30px 18px;
+    border: 8px solid $secondary-bg-color;
+}
+
+.coupon-preview__image {
+    width: 138px;
+    float: left;
+    margin: 0 38px 24px 0;
+}
+
+.coupon-preview__meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    font-weight: 700;
+    font-size: 16px;
+
+    span {
+        overflow: hidden;
+    }
+}
+
+.stub-line {
+    height: 14px;
+    margin-bottom: 14px;
+    background: $primary-bg-color;
+
+    &.margin-none {
+        margin: 0;
+    }
+}
+
+.stub-line_blue {
+    background-color: lighten($brand-blue, 30%);
+}
+
+.stub-line_meta {
+    width: 35%;
+}
+
+.coupon-value-stub,
+.description-stub {
+    display: inline-block;
+
+    .stub-line {
+        width: 210px;
+    }
+}
+
+.description-stub {
+    .stub-line {
+        &:last-child {
+            width: 60%;
+        }
+    }
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preview-header__icon {
+    font-size: 24px;
+    color: $brand-blue;
+    cursor: pointer;
+    transition: color .2s ease-out;
+}
+
+.coupon-preview__header {
+    h2 {
+        max-width: 350px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

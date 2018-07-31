@@ -1,0 +1,31 @@
+@import '../../../../../core/scss/vars';
+
+.product-brand-group {
+    width: 100%;
+    padding: 7px 12px;
+    height: 162px;
+    overflow: auto;
+    background: $white;
+    border: 1px solid $dusty-gray;
+
+    .product-brand-group__item {
+        position: relative;
+        padding: 4px 24px 4px 6px;
+        margin-bottom: 2px;
+        border-radius: 2px;
+        background-color: $gray-b-17;
+
+        .delete-product-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 0;
+            width: 24px;
+            height: 100%;
+            border: 0;
+            background: transparent;
+            font-size: 12px;
+            cursor: pointer;
+        }
+    }
+}

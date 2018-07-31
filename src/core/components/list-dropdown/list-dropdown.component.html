@@ -1,0 +1,11 @@
+<div dropdown class="table-dropdown">
+    <i class="icon-th" dropdownToggle></i>
+    <nav *dropdownMenu class="table-dropdown__list" role="menu">
+        <span class="table-dropdown__item"
+              (click)="edit(); false"
+              [translate]="'listDropDown.editOption'"></span>
+        <span class="table-dropdown__item"
+              (click)="copy(); false"
+              [translate]="'listDropDown.copyOption'"></span>
+    </nav>
+</div>

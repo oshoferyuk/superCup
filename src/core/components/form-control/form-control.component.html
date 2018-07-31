@@ -1,0 +1,18 @@
+<div class="form-section" [ngClass]="alignItems ? alignItems : ''">
+    <label class="form-section__label"
+           [class.required-label]="required"
+           [class.italic-label]="italicLabel"
+           [attr.for]="label">
+
+        <span [fpTooltip]="tooltipLabel">
+            {{ labelTranslate | translate }}
+        </span>
+    </label>
+
+    <div class="form-section__content">
+        <ng-content></ng-content>
+        <fp-control-message *ngIf="control"
+                            [control]="control">
+        </fp-control-message>
+    </div>
+</div>

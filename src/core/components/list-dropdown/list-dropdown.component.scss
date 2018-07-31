@@ -1,0 +1,52 @@
+@import '../../scss/vars';
+
+:host {
+    height: 55px;
+    line-height: 55px;
+    display: block;
+}
+
+.icon-th {
+    font-size: 21px;
+    width: 10px;
+    overflow: hidden;
+    display: inline-block;
+    cursor: pointer;
+    color: $brand-blue;
+}
+
+.open {
+    position: relative;
+
+    .table-dropdown__list {
+        display: block;
+    }
+}
+
+.table-dropdown__list {
+    position: absolute;
+    display: none;
+    line-height: 16px;
+    background-color: $white;
+    padding: 0 10px;
+    border: 1px solid $dusty-gray;
+    border-radius: 2px;
+    top: 0;
+    right: 0;
+}
+
+.table-dropdown__item {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 2px solid $disabled;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:last-of-type {
+        border-bottom: 0;
+    }
+
+    &:hover {
+        color: lighten($primary-text-color, 20%);
+    }
+}

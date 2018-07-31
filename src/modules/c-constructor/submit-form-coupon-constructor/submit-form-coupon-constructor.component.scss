@@ -1,0 +1,66 @@
+@import '../../../core/scss/vars';
+
+:host {
+    .icon-ic-time,
+    .icon-ic-status {
+        font-size: 14px;
+        margin-right: 8px;
+    }
+}
+
+.publish-coupon {
+    padding: 27px 24px 21px;
+    margin-bottom: 40px;
+    background: $secondary-bg-color;
+    border-radius: 2px;
+
+    .error-message-wrap {
+        position: relative;
+        display: inline-block;
+    }
+
+    &.publish-error {
+        outline: 1px solid $brand-error;
+
+        .publish-error__message {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 3px;
+            color: $brand-error;
+            font-size: 12px;
+        }
+    }
+}
+
+.publish-coupon__info {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid $neutral-color;
+}
+
+.info-item {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.info-item__status {
+    margin-right: 30px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-outline-delete,
+.coupon-save-btn {
+    width: 100px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.coupon-save-btn {
+    margin-right: 22px;
+}
+

@@ -1,0 +1,33 @@
+files:
+  include:
+    - 'src/app/core/scss/**/*.scss'
+    - 'src/app/core/dialog/*.scss'
+    - 'src/app/modules/**/*.scss'
+  ignore:
+    - 'src/app/core/scss/helpers/_icons-font.scss'
+    - 'src/app/core/scss/helpers/_normalize.scss'
+rules:
+  indentation:
+    - 1
+    - size: 4
+  property-sort-order:
+    - 0
+  class-name-format:
+    - 1
+    - convention: strictbem
+  no-qualifying-elements:
+    - 1
+    - allow-element-with-attribute: true
+      allow-element-with-class: true
+  force-attribute-nesting: 0
+  nesting-depth:
+    - 1
+    - max-depth: 3
+  force-element-nesting: 0
+  no-trailing-whitespace: 0
+  no-important: 0
+  placeholder-in-extend: 0
+  no-vendor-prefixes: 0
+  no-color-literals:
+    - 1
+    - allow-rgba: true

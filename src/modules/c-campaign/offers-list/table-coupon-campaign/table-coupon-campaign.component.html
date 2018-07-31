@@ -1,0 +1,154 @@
+<table class="campaign-table">
+    <tr class="campaign-table__header">
+        <th class="campaign-table__checkbox">
+            <input id="all-coupons"
+                   type="checkbox"
+                   [checked]="isAllSelected()"
+                   (change)="selectAll($event.target.checked)">
+            <label for="all-coupons">
+                <span class="icon-ok"></span>
+            </label>
+        </th>
+        <th class="campaign-table__img">
+            <div class="campaign-table__wrap">Image</div>
+        </th>
+        <th class="campaign-table__id"
+            [ngClass]="getSortingClass('ID')"
+            (click)="toggleSorting('ID')">
+            <div class="campaign-table__wrap">
+                <span>Offer ID </span>
+                <i class="campaign-table__arrow"></i>
+            </div>
+        </th>
+        <th class="campaign-table__type"
+            [ngClass]="getSortingClass('TYPE')"
+            (click)="toggleSorting('TYPE')">
+            <div class="campaign-table__wrap">
+                <span>Type</span>
+                <i class="campaign-table__arrow"></i>
+            </div>
+        </th>
+        <th class="campaign-table__printable"
+            [ngClass]="getSortingClass('PRINTABLE')"
+            (click)="toggleSorting('PRINTABLE')">
+            <div class="campaign-table__wrap">
+                <span>Printable</span>
+                <i class="campaign-table__arrow"></i>
+            </div>
+        </th>
+        <th class="campaign-table__brand"
+            [ngClass]="getSortingClass('BRAND')"
+            (click)="toggleSorting('BRAND')">
+            <div class="campaign-table__wrap">
+                <span>Brand</span>
+                <i class="campaign-table__arrow"></i>
+            </div>
+        </th>
+        <th class="campaign-table__description"
+            [ngClass]="getSortingClass('DESCRIPTION')"
+            (click)="toggleSorting('DESCRIPTION')">
+            <div class="campaign-table__wrap">
+                <span>Offer Description</span>
+            </div>
+        </th>
+        <th class="campaign-table__start-date"
+            [ngClass]="getSortingClass('STARTDATE')"
+            (click)="toggleSorting('STARTDATE')">
+            <div class="campaign-table__wrap">
+                <span>Validity<br/>Start Date</span>
+                <i class="campaign-table__arrow"></i>
+            </div>
+        </th>
+        <th class="campaign-table__end-date"
+            [ngClass]="getSortingClass('ENDDATE')"
+            (click)="toggleSorting('ENDDATE')">
+            <div class="campaign-table__wrap">
+                <span>Validity<br/>End Date</span>
+                <i class="campaign-table__arrow"></i>
+            </div>
+        </th>
+        <th class="campaign-table__category"
+            [ngClass]="getSortingClass('CATEGORY')"
+            (click)="toggleSorting('CATEGORY')">
+            <div class="campaign-table__wrap">
+                <span>Category</span>
+                <i class="campaign-table__arrow"></i>
+            </div>
+        </th>
+        <th class="campaign-table__quantity"
+            [ngClass]="getSortingClass('DISTRIBUTION')"
+            (click)="toggleSorting('DISTRIBUTION')">
+            <div class="campaign-table__wrap">
+                <span>Distribution Quantity</span>
+                <i class="campaign-table__arrow"></i>
+            </div>
+        </th>
+        <th class="campaign-table__status"
+            [ngClass]="getSortingClass('STATUS')"
+            (click)="toggleSorting('STATUS')">
+            <div class="campaign-table__wrap">
+                <span>Status</span>
+                <i class="campaign-table__arrow"></i>
+            </div>
+        </th>
+        <th class="campaign-table__btn"></th>
+    </tr>
+
+    <tr class="campaign-table__row"
+        *ngFor="let offer of offers"
+        (click)="clickOffers($event, offer)">
+        <td class="campaign-table__checkbox">
+            <div class="campaign-table__info">
+                <input id="offer{{ offer.id }}"
+                       [checked]="isSelected(offer.id)"
+                       (change)="toggleSelection(offer, $event.target.checked)"
+                       type="checkbox">
+                <label for="offer{{ offer.id }}">
+                    <span class="icon-ok"></span>
+                </label>
+            </div>
+        </td>
+        <td class="campaign-table__img">
+            <div class="campaign-table__info">
+                <img src="{{ offer.imageUrl }}" alt="">
+            </div>
+        </td>
+        <td class="campaign-table__id">
+            <div class="campaign-table__info">{{ offer.id }}</div>
+        </td>
+        <td class="campaign-table__type">
+            <div class="campaign-table__info">{{ getType(offer) }}</div>
+        </td>
+        <td class="campaign-table__printable">
+            <div class="campaign-table__info">{{ offer.printable ? 'Yes': 'No' }}</div>
+        </td>
+        <td class="campaign-table__brand">
+            <div class="campaign-table__info">{{ offer.brand }}</div>
+        </td>
+        <td class="campaign-table__description">
+            <div class="campaign-table__info">{{ offer.productDescription }}</div>
+        </td>
+        <td class="campaign-table__start-date">
+            <div class="campaign-table__info" *ngIf="offer.validityStart">{{ offer.validityStart.split("T")[0] | date:'mediumDate' }}</div>
+            <div class="campaign-table__info" *ngIf="!offer.validityStart"></div>
+        </td>
+        <td class="campaign-table__end-date">
+            <div class="campaign-table__info" *ngIf="offer.validityEnd">{{ offer.validityEnd.split("T")[0] | date:'mediumDate' }}</div>
+            <div class="campaign-table__info" *ngIf="!offer.validityEnd"></div>
+        </td>
+        <td class="campaign-table__category">
+            <div class="campaign-table__info">{{ offer.category }}</div>
+        </td>
+        <td class="campaign-table__quantity">
+            <div class="campaign-table__info">{{ offer.quantityStart }}</div>
+        </td>
+        <td class="campaign-table__status">
+            <div class="campaign-table__info">{{ offer.status }}</div>
+        </td>
+        <td class="campaign-table__btn">
+            <fp-list-dropdown (editOffer)="editCurrentOffer(offer)"
+                              (copyOffer)="copyCurrentOffer(offer)">
+            </fp-list-dropdown>
+        </td>
+    </tr>
+</table>

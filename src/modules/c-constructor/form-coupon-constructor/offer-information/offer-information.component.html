@@ -1,0 +1,11 @@
+<div class="form-constructor__offer" [ngSwitch]="getType()">
+    <fp-offer-information-coupon [form]="couponForm"
+                                 [marketingProgram]="marketingProgram"
+                                  *ngSwitchCase="offerTypes.coupon">
+    </fp-offer-information-coupon>
+    <fp-offer-information-sample [form]="sampleForm"
+                                 [sampleValues]="sampleValues"
+                                 [marketingProgram]="marketingProgram"
+                                  *ngSwitchCase="offerTypes.sample">
+    </fp-offer-information-sample>
+</div>

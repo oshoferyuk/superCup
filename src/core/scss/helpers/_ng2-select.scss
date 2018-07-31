@@ -1,0 +1,39 @@
+.ui-select-container {
+    position: relative;
+    width: 100%;
+    background: $white;
+    border: 1px solid $dusty-gray;
+    border-radius: 2px;
+    padding: 3px 12px !important;
+
+    .btn {
+        position: relative;
+        padding: 5px 6px;
+        padding-right: 20px;
+        border-radius: 2px;
+        line-height: 1.17;
+        border: 0;
+        background: $primary-bg-color;
+        color: $primary-text-color;
+        font-size: 12px;
+
+        .close {
+            position: absolute;
+            right: 5px;
+        }
+    }
+
+    .ui-select-choices {
+        position: absolute;
+        z-index: 50;
+        margin: 0 -1px;
+        padding: 0;
+        width: calc(100% + 2px) !important;
+        left: 0;
+        top: 100%;
+        background: $white;
+        list-style: none;
+        border: 1px solid $dusty-gray;
+        border-top: 0;
+    }
+}

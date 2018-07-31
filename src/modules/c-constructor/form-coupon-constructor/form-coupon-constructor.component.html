@@ -1,0 +1,45 @@
+<header class="nav-tabs">
+    <button class="nav-tabs__btn"
+            (click)="setOfferInfoFormGroupActive()"
+            [ngClass]="{ 'active': isOfferInfoFormGroupActive() }"
+    >Offer Information
+    </button>
+    <button class="nav-tabs__btn"
+            (click)="setDistributionDetailsFormActive()"
+            [ngClass]="{ 'active': isDistributionDetailsFormActive() }"
+    >Distribution Details
+    </button>
+</header>
+
+<div class="require-note required-label">Required Fields</div>
+
+<form [formGroup]="form" novalidate class="form-constructor"
+      [ngClass]="{'submitted': form['submitted']}">
+
+    <fp-form-control *ngIf="isOfferInfoFormGroupActive()"
+                     [label]="offerFields.type"
+                     [tooltipLabel]="'Indicates whether the offer is a coupon or a sample.'"
+                     [required]="true">
+
+        <span *ngFor="let type of formtypes;let i = index">
+            <input id="form-type-{{i}}"
+                   type="radio"
+                   [value]="type"
+                   (click)="onSwitchTypeClick($event, type)"
+                   formControlName="{{offerFields.type}}">
+            <label class="radio offer-type-label" for="form-type-{{i}}">{{ type }}</label>
+        </span>
+    </fp-form-control>
+
+    <div class="dashed-line" *ngIf="isOfferInfoFormGroupActive()"></div>
+
+    <fp-offer-information [sampleValues]="sampleValues"
+                          [form]="form"
+                          [marketingProgram]="marketingProgram"
+                          [hidden]="isDistributionDetailsFormActive()">
+    </fp-offer-information>
+    <fp-distribution-details [form]="form"
+                             [marketingProgram]="marketingProgram"
+                             [hidden]="isOfferInfoFormGroupActive()">
+    </fp-distribution-details>
+</form>

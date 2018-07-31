@@ -1,0 +1,15 @@
+<div class="drop-container" ngFileDrop
+     (uploadOutput)="onUploadOutput($event)"
+     [uploadInput]="uploadInput">
+    <label class="upload-button">
+        <button class="btn btn-outline-blue"
+                (click)="productPictureInput.click()">
+            Upload
+        </button>
+        <input #productPictureInput type="file"
+               class="btn btn-outline-blue"
+               (uploadOutput)="onUploadOutput($event)"
+               [uploadInput]="uploadInput"
+               ngFileSelect>
+    </label>
+</div>

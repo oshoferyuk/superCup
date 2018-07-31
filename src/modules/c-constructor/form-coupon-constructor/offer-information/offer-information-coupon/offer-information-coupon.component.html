@@ -1,0 +1,140 @@
+<div class="form-constructor__offer" [formGroup]="form">
+
+    <fp-form-control [label]="offerFields.language"
+                     [tooltipLabel]="'The language of the offer, set per Marketing Channel.'">
+
+        <input [readonly]="true"
+               formControlName="{{offerFields.language}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.currency"
+                     [tooltipLabel]="'The currency of the offer, set per Marketing Channel.'">
+
+        <input [readonly]="true"
+               formControlName="{{offerFields.currency}}">
+    </fp-form-control>
+
+    <fp-input-switcher
+        [label]="offerFields.printable"
+        [fpTooltipText]="'Indicates whether the coupon is offered as printable and receipt rebate.'"
+        formControlName="{{offerFields.printable}}"
+        (click)="switchPrintable()">
+    </fp-input-switcher>
+
+    <fp-form-control *ngIf="isPrintable()"
+                     [label]="offerFields.offerPrintingHouseID"
+                     [control]="form.get(offerFields.offerPrintingHouseID)"
+                     [tooltipLabel]="'The unique ID for the offer as provided by the printing house.'"
+                     [required]="true">
+
+        <input placeholder="{{ 'placeholders.offerIdentifier' | translate }}"
+               [id]="offerFields.offerPrintingHouseID"
+               formControlName="{{offerFields.offerPrintingHouseID}}">
+    </fp-form-control>
+
+    <fp-form-control *ngIf="isPrintable()"
+                     [label]="offerFields.eanNumber"
+                     [control]="form.get(offerFields.eanNumber)"
+                     [tooltipLabel]="'The Coupon GTIN (UPC or Coupon EAN) or GS1 DataBar to be printed as a barcode on the printable coupon.'"
+                     [required]="true">
+
+        <input placeholder="{{ 'placeholders.offerIdentifier' | translate }}"
+               [id]="offerFields.eanNumber"
+               formControlName="{{offerFields.eanNumber}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.couponValue"
+                     [control]="form.get(offerFields.couponValue)"
+                     [tooltipLabel]="'The value of the reward in the currency set by Marketing Channel. Omit any currency and negative signs.'"
+                     [required]="true">
+
+        <input placeholder="{{ 'placeholders.enterNumber' | translate }}"
+               [id]="offerFields.couponValue"
+               [textMask]="{
+                           mask: onlyDecimalNumberMask,
+                           pipe:autoCorrectedCouponValue,
+                           guide: false
+                           }"
+               formControlName="{{offerFields.couponValue}}">
+    </fp-form-control>
+
+    <fp-input-switcher
+        [label]="offerFields.highValue"
+        [fpTooltipText]="'Indicates whether the offer is classified as a high-value offer, set per Marketing Channel.'"
+        formControlName="{{offerFields.highValue}}">
+    </fp-input-switcher>
+
+    <fp-form-control *ngIf="isHighValue()"
+                     [label]="offerFields.minimumPurchasePrice"
+                     [control]="form.get(offerFields.minimumPurchasePrice)"
+                     [tooltipLabel]="'Indicates the minimum unit purchase price (before VAT) eligible for redemption of the offer, only applicable to high value coupons.'"
+                     [required]="true">
+
+        <input placeholder="{{ 'placeholders.enterNumber' | translate }}"
+               [textMask]="{mask: onlyDecimalNumberMask}"
+               formControlName="{{offerFields.minimumPurchasePrice}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.ncnCode"
+                     [control]="form.get(offerFields.ncnCode)"
+                     [tooltipLabel]="'Optional offer identifier provided by the clearing house.'">
+
+        <input placeholder="{{ 'placeholders.nchCode' | translate }}"
+               [id]="offerFields.ncnCode"
+               formControlName="{{offerFields.ncnCode}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.offerDescription"
+                     [control]="form.get(offerFields.offerDescription)"
+                     [tooltipLabel]="'The presentational elements of the offer, in the languages set per Marketing Channel.'"
+                     [required]="true">
+
+        <input class="full-width"
+               placeholder="{{ 'placeholders.shortOfferDescription' | translate }}"
+               [id]="offerFields.offerDescription"
+               formControlName="{{offerFields.offerDescription}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.offerSummary"
+                     [control]="form.get(offerFields.offerSummary)"
+                     [tooltipLabel]="'A descriptive summary of the offer for internal use. Consumers will not see this.'"
+                     [alignItems]="'flex-start'"
+                     [required]="true">
+
+        <textarea class="full-width"
+                  placeholder="{{ 'placeholders.productDescription' | translate }}"
+                  [id]="offerFields.offerSummary"
+                  formControlName="{{offerFields.offerSummary}}">
+        </textarea>
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.productImage"
+                     [control]="form.get(offerFields.productImage)"
+                     [tooltipLabel]="'Upload of the product image for display on the Coupon.'"
+                     [required]="true">
+        <fp-image-uploader (imageUploaded)="productImageUploaded($event)"
+                           (imageMaxSizeExceed)="productImageMaxSizeExceed()"></fp-image-uploader>
+        <span class="form-section__separator"></span>
+
+        <input class="full-width"
+               placeholder="{{ 'placeholders.urlOfImage' | translate }}"
+               [readonly]="true"
+               formControlName="{{offerFields.productImage}}">
+    </fp-form-control>
+
+    <fp-form-control *ngIf="isPrintable()"
+                     [label]="offerFields.printableCouponImage"
+                     [control]="form.get(offerFields.printableCouponImage)"
+                     [tooltipLabel]="'Upload of the product image for display on the Coupon.'"
+                     [required]="true">
+
+        <fp-image-uploader (imageUploaded)="printableCouponImageUploaded($event)"
+                           (imageMaxSizeExceed)="productPrintMaxSizeExceed()"></fp-image-uploader>
+        <span class="form-section__separator"></span>
+
+        <input class="full-width"
+               placeholder="{{ 'placeholders.urlOfImage' | translate }}"
+               [readonly]="true"
+               formControlName="{{offerFields.printableCouponImage}}">
+    </fp-form-control>
+</div>

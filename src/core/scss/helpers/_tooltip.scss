@@ -1,0 +1,40 @@
+@import '../vars';
+
+.tooltip {
+    position: absolute;
+    z-index: 100;
+    line-height: 1.5;
+    opacity: 0;
+}
+
+.tooltip.in {
+    opacity: .9;
+}
+
+.tooltip.top {
+    padding: 4px 0;
+}
+
+.tooltip-inner {
+    max-width: 200px;
+    padding: 3px 8px;
+    color: $white;
+    text-align: left;
+    background-color: $picked-bluewood;
+}
+
+.tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.tooltip.top .tooltip-arrow {
+    bottom: 0;
+    left: 15%;
+    margin-left: -5px;
+    border-width: 5px 5px 0;
+    border-top-color: $picked-bluewood;
+}

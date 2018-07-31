@@ -1,0 +1,12 @@
+<fp-form-control>
+    <div class="product-brand-group">
+        <div class="product-brand-group__item" *ngFor="let productSummary of productSummaries">
+            {{filterProductSummary(productSummary)}}
+
+            <button class="delete-product-btn"
+                    (click)="onDeleteProduct(productSummary)">
+                <i class="icon-ic-s-cancel"></i>
+            </button>
+        </div>
+    </div>
+</fp-form-control>

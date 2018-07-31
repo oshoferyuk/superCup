@@ -1,0 +1,307 @@
+select,
+input,
+textarea {
+    padding: 6px 12px;
+    border-radius: 2px;
+    border: 1px solid $dusty-gray;
+    font-family: $source-sans;
+
+    &.full-width {
+        flex: 1 1;
+        width: 100%;
+    }
+
+    &:focus {
+        border-color: $brand-blue;
+        outline-color: $brand-blue;
+    }
+
+    &:hover {
+        border-color: $brand-blue;
+    }
+
+    &[readonly],
+    &[disabled] {
+        background-color: transparent;
+
+        &:focus {
+            border-color: $dusty-gray;
+            outline-color: $dusty-gray;
+        }
+
+        &:hover {
+            border-color: $dusty-gray;
+        }
+    }
+}
+
+select {
+    padding: 4px 12px;
+}
+
+textarea {
+    resize: none;
+}
+
+::-webkit-input-placeholder {
+    color: lighten($primary-text-color, 50%);
+}
+
+::-moz-placeholder {
+    color: lighten($primary-text-color, 50%);
+}
+
+:-ms-input-placeholder {
+    color: lighten($primary-text-color, 50%);
+}
+
+input[type='checkbox'] {
+    display: none;
+
+    & + label {
+        .icon-ok {
+            &::before {
+                position: absolute;
+                top: 1px;
+                font-size: 10px;
+                color: $white;
+                left: -1px;
+                display: none;
+            }
+        }
+
+        span {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background-color: $white;
+            border: 1px solid $dusty-gray;
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+            top: 2px;
+            margin-right: 5px;
+        }
+    }
+
+    &:checked {
+        & + label span {
+            background-color: $brand-blue;
+            border-color: $brand-blue;
+
+            &::before {
+                display: block;
+            }
+        }
+    }
+
+    &.large + label {
+        span {
+            width: 20px;
+            height: 20px;
+            top: 5px;
+        }
+
+        .icon-ok {
+            &::before {
+                font-size: 14px;
+            }
+        }
+    }
+
+}
+
+input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+
+    &:checked {
+        & + .radio {
+            &::after {
+                opacity: 1;
+            }
+        }
+    }
+
+    & + .radio {
+        font-weight: 400;
+    }
+}
+
+label {
+    &.italic-label {
+        font-weight: 600;
+        font-style: italic;
+        font-size: 12px;
+        color: $picked-bluewood;
+    }
+}
+
+label[for] {
+    cursor: pointer;
+}
+
+.radio {
+    position: relative;
+    padding-left: 30px;
+    line-height: 20px;
+    display: inline-block;
+    margin: 0 20px 2px 0;
+
+    &::before {
+        content: '';
+        width: 20px;
+        height: 20px;
+        background-color: $white;
+        border: 1px solid $dusty-gray;
+        border-radius: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &::after {
+        content: '';
+        width: 14px;
+        height: 14px;
+        background-color: $brand-blue;
+        border-radius: 100%;
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        opacity: 0;
+        transition: opacity .2s ease-out;
+    }
+}
+
+.required-label {
+    position: relative;
+
+    &::before {
+        content: '*';
+        position: absolute;
+        top: 0;
+        left: -15px;
+        color: $brand-cyan;
+        font-size: 16px;
+    }
+}
+
+.require-note {
+    font-size: 12px;
+    font-weight: 600;
+    font-style: italic;
+    margin: 20px 0 10px 40px;
+}
+
+.form-section {
+    display: flex;
+    align-items: center;
+    padding-bottom: 24px;
+
+    &.flex-start {
+        align-items: flex-start;
+
+        label {
+            margin-top: 6px;
+        }
+    }
+
+    .small {
+        width: 112px;
+        margin: 0 15px;
+    }
+
+    .nextto {
+        margin-left: 5px;
+    }
+}
+
+.form-section__select {
+    &.mat-select {
+        max-width: 186px;
+        min-width: 186px;
+    }
+}
+
+.form-section__separator {
+    font-weight: 600;
+    margin: 0 10px;
+}
+
+.form-section__label {
+    width: 148px;
+    margin-right: 24px;
+    font-weight: 600;
+}
+
+.form-section__content {
+    position: relative;
+    display: flex;
+    flex: 1 1;
+    align-items: center;
+}
+
+.form-section__error-message {
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    color: $brand-error;
+    font-size: 12px;
+}
+
+form {
+    input,
+    select,
+    textarea,
+    fp-multiple-select,
+    my-date-picker {
+        &.ng-invalid.ng-touched .ui-select-container,
+        &.ng-invalid.ng-touched .mydp,
+        &.ng-invalid.ng-touched {
+            border-color: $brand-error;
+
+            &:focus {
+                outline: 1px solid $brand-error;
+            }
+        }
+    }
+}
+
+.input-error {
+    border-color: $brand-error;
+
+    &:hover {
+        border-color: $brand-error;
+    }
+
+    &:focus {
+        border-color: $brand-error;
+        outline: 1px solid $brand-error;
+    }
+}
+
+.error-message {
+    color: $brand-error;
+    font-size: 12px;
+}
+
+.form-search-wrap {
+    position: relative;
+
+    .icon-search {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 18px;
+        cursor: pointer;
+        line-height: 30px;
+        margin-right: 6px;
+    }
+}
+
+.form-search-wrap__elem {
+    width: 100%;
+    padding-right: 23px;
+    margin-bottom: 24px;
+}

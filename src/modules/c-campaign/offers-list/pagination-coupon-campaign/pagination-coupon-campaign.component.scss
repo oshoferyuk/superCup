@@ -1,0 +1,135 @@
+@import '../../../../core/scss/vars';
+@import '../../../../core/scss/mixins';
+@import '../../../../core/scss/helpers/icons-font';
+
+:host /deep/ {
+    .pagination {
+        display: flex;
+        justify-content: flex-end;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 35px;
+    }
+
+    .page-item {
+        border: 1px solid $neutral-color;
+        border-radius: 2px;
+        text-align: center;
+        margin: 0 2px;
+
+        &:first-child,
+        &:last-of-type {
+            span {
+                display: none;
+            }
+
+            .page-link {
+                font-family: $icon-fonts;
+            }
+        }
+
+        &:first-child {
+            .page-link {
+                @extend .icon-left-small;
+            }
+        }
+
+        &:last-of-type {
+            .page-link {
+                @extend .icon-right-small;
+            }
+        }
+
+        &.active,
+        &:hover {
+            background-color: $primary-hover-color;
+            border-color: $primary-hover-color;
+
+            .page-link {
+                color: $white;
+            }
+        }
+
+        &.disabled {
+            background-color: transparent;
+            border-color: $neutral-color;
+
+            .page-link {
+                color: lighten($primary-text-color, 50%);
+                cursor: default;
+            }
+        }
+    }
+
+    .page-link {
+        display: inline-block;
+        text-decoration: none;
+        color: $brand-blue;
+        min-width: 32px;
+        padding: 3px 6px;
+
+        &:focus {
+            outline: 0;
+        }
+    }
+
+    .pagination-prev {
+        .page-link {
+            @extend .icon-left-small;
+
+            &::before {
+                font-family: $icon-fonts;
+                margin-right: 4px;
+            }
+        }
+    }
+
+    .pagination-next {
+        .page-link {
+            &::after {
+                @extend .icon-right-small::before;
+                font-family: $icon-fonts;
+                margin-left: 4px;
+            }
+        }
+    }
+
+    .sr-only {
+        display: none;
+    }
+
+    .mat-select-trigger {
+        height: 24px;
+        min-width: 0;
+    }
+
+    .mat-select-panel {
+        width: 106px;
+        max-width: 106px;
+    }
+}
+
+.pagination-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagination-counter {
+    margin: 0 10px 0 20px;
+    height: 24px;
+    min-width: 106px;
+    width: 106px;
+
+    .mat-select-panel {
+        width: 106px;
+        max-width: 106px;
+    }
+}
+
+.pagination-wrap__select {
+    display: flex;
+}
+
+.pagination-wrap__label {
+    line-height: 22px;
+}

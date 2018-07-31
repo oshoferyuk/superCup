@@ -1,0 +1,61 @@
+<header class="preview-header">
+    <h3 [fpTooltip]="'Vivamus sagittis lacus'"
+        [translate]="offerType"></h3>
+
+    <div class="preview-header__icons">
+        <span class="icon-ic-monitor preview-header__icon"
+              [ngClass]="{ 'active': isWebView }"
+              (click)="setWebPreview()"
+        ></span>
+        <span class="icon-ic-printable preview-header__icon"
+              *ngIf="printable"
+              [ngClass]="{ 'active': !isWebView }"
+              (click)="setPrintablePreview()"
+        ></span>
+    </div>
+</header>
+
+<div class="coupon-preview">
+    <div class="coupon-preview__header cf">
+        <div class="coupon-preview__image">
+            <span *ngIf="isWebView">
+                <img *ngIf="productImage; else previewDefaultImage"
+                     src="{{productImage}}"
+                     alt="coupon image">
+            </span>
+
+            <span *ngIf="!isWebView">
+                <img *ngIf="printableCouponImage; else previewDefaultImage"
+                     src="{{printableCouponImage}}"
+                     alt="printable coupon image">
+            </span>
+        </div>
+
+        <h2 *ngIf="couponValue; else previewValue">{{couponValue}}</h2>
+        <p *ngIf="offerDescription; else previewProductDescription">{{offerDescription}}</p>
+    </div>
+
+    <div class="coupon-preview__meta" *ngIf="toggleMetaData()">
+        <span [ngClass]="{ 'stub-line stub-line_blue stub-line_meta margin-none': !eanNumber }">{{eanNumber}}</span>
+        <span [ngClass]="{ 'stub-line stub-line_blue stub-line_meta margin-none': !ncnCode }">{{ncnCode}}</span>
+    </div>
+</div>
+
+
+<ng-template #previewDefaultImage>
+    <img src="assets/img/coupon-big.svg" alt="preview default image" class="image-stub">
+</ng-template>
+
+<ng-template #previewValue>
+    <div class="coupon-value-stub">
+        <div class="stub-line stub-line_blue"></div>
+        <div class="stub-line stub-line_blue"></div>
+    </div>
+</ng-template>
+
+<ng-template #previewProductDescription>
+    <div class="description-stub">
+        <div class="stub-line"></div>
+        <div class="stub-line"></div>
+    </div>
+</ng-template>

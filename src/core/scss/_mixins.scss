@@ -1,0 +1,18 @@
+@mixin font-face($family, $name, $hash: '') {
+    $file-path: '/assets/fonts/' + $family + '/' + $name;
+    @if $hash != '' {
+        $hash: '?#{$hash}';
+    }
+
+    @font-face {
+        font-family: $name;
+        src: url('#{$file-path}.eot#{$hash}'),
+        url('#{$file-path}.eot#{$hash}#iefix') format('embedded-opentype'),
+        url('#{$file-path}.woff2#{$hash}') format('woff2'),
+        url('#{$file-path}.woff#{$hash}') format('woff'),
+        url('#{$file-path}.ttf#{$hash}') format('truetype'),
+        url('#{$file-path}.svg#{$hash}#flip-png-icons') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+}

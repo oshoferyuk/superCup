@@ -1,0 +1,127 @@
+<section class="filter-checkboxes">
+    <div class="filter-checkboxes__wrap filter-checkboxes__wrap_header">
+        <div class="filter-checkboxes__half">
+            <div class="container-filter third">
+                <input class="large"
+                       id="audience-segments"
+                       [checked]="isAllSelected(filtersTypes.segments)"
+                       (change)="selectAll($event.target.checked, filtersTypes.segments)"
+                       type="checkbox">
+                <label class="container-filter__title"
+                       for="audience-segments">
+                    <span class="icon-ok"></span>{{'filterTypes.audienceSegments' | translate}}
+                </label>
+            </div>
+
+            <div class="container-filter third">
+                <input class="large"
+                       id="campaign-status"
+                       [checked]="isAllSelected(filtersTypes.statuses)"
+                       (change)="selectAll($event.target.checked, filtersTypes.statuses)"
+                       type="checkbox">
+                <label class="container-filter__title"
+                       for="campaign-status">
+                    <span class="icon-ok"></span>{{'filterTypes.campaignStatus' | translate}}
+                </label>
+            </div>
+            <div class="container-filter third"
+                 *ngIf="filtersList.categories">
+                <input class="large"
+                       id="categories"
+                       [checked]="isAllSelected(filtersTypes.categories)"
+                       (change)="selectAll($event.target.checked, filtersTypes.categories)"
+                       type="checkbox">
+                <label class="container-filter__title"
+                       for="categories">
+                    <span class="icon-ok"></span>{{'filterTypes.categories' | translate}}
+                </label>
+            </div>
+        </div>
+
+        <div class="filter-checkboxes__half">
+            <div class="container-filter container-filter_grow"
+                 *ngIf="filtersList.brands">
+                <input class="large"
+                       id="{{filtersTypes.brands}}"
+                       [checked]="isAllSelected(filtersTypes.brands)"
+                       (change)="selectAll($event.target.checked, filtersTypes.brands)"
+                       type="checkbox">
+                <label class="container-filter__title"
+                       for="{{filtersTypes.brands}}">
+                    <span class="icon-ok"></span>{{'filterTypes.brands' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <perfect-scrollbar>
+        <div class="filter-checkboxes__wrap">
+            <div class="filter-checkboxes__half">
+                <div class="container-filter third">
+                    <ul class="list-filter">
+                        <li *ngFor="let segment of filtersList.segments">
+                            <input class="large"
+                                   id="segment{{segment.id}}"
+                                   [checked]="isSelected(segment, filtersTypes.segments)"
+                                   (change)="toggleSelection(segment, $event.target.checked, filtersTypes.segments)"
+                                   type="checkbox">
+                            <label for="segment{{segment.id}}">
+                                <span class="icon-ok"></span>{{segment.name}}
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="container-filter third">
+                    <ul class="list-filter">
+                        <li *ngFor="let status of filtersList.statuses">
+                            <input class="large"
+                                   id="status{{status.id}}"
+                                   [checked]="isSelected(status, filtersTypes.statuses)"
+                                   (change)="toggleSelection(status, $event.target.checked, filtersTypes.statuses)"
+                                   type="checkbox">
+                            <label for="status{{status.id}}">
+                                <span class="icon-ok"></span>{{'offer.statuses.' + status.name | translate}}
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="container-filter third"
+                     *ngIf="filtersList.categories">
+                    <ul class="list-filter">
+                        <li *ngFor="let category of filtersList.categories">
+                            <input class="large"
+                                   id="category{{category.id}}"
+                                   [checked]="isSelected(category, filtersTypes.categories)"
+                                   (change)="toggleSelection(category, $event.target.checked, filtersTypes.categories)"
+                                   type="checkbox">
+                            <label for="category{{category.id}}">
+                                <span class="icon-ok"></span>{{category.name}}
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="filter-checkboxes__half">
+                <div class="container-filter container-filter_grow"
+                     *ngIf="filtersList.brands">
+                    <div class="container-filter__wrap">
+                        <ul class="list-filter list-filter_brand">
+                            <li *ngFor="let brand of filtersList.brands">
+                                <input class="large"
+                                       id="brand{{brand.id}}"
+                                       [checked]="isSelected(brand, filtersTypes.brands)"
+                                       (change)="toggleSelection(brand, $event.target.checked, filtersTypes.brands)"
+                                       type="checkbox">
+                                <label for="brand{{brand.id}}">
+                                    <span class="icon-ok"></span>{{brand.name}}
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </perfect-scrollbar>
+</section>

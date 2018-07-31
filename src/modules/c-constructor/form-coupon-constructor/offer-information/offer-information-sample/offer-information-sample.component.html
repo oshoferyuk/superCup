@@ -1,0 +1,65 @@
+<div class="form-constructor__offer" [formGroup]="form">
+    <fp-form-control [label]="offerFields.language"
+                     [tooltipLabel]="'The language of the offer, set per Marketing Channel.'">
+
+        <input placeholder="Language"
+               [readonly]="true"
+               formControlName="{{offerFields.language}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.sampleValue"
+                     [control]="form.get(offerFields.sampleValue)"
+                     [tooltipLabel]="'Single Use, Multiple Use, Full Pack.'"
+                     [required]="true">
+
+        <md-select [id]="offerFields.sampleValue"
+                   placeholder="Select Category"
+                   class="form-section__select"
+                   floatPlaceholder="never"
+                   formControlName="{{offerFields.sampleValue}}">
+            <md-option *ngFor="let sampleValue of sampleValues"
+                       [value]="sampleValue.code">
+                {{sampleValue.name}}
+            </md-option>
+        </md-select>
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.offerDescription"
+                     [control]="form.get(offerFields.offerDescription)"
+                     [tooltipLabel]="'The presentational elements of the offer, in the languages set per Marketing Channel.'"
+                     [required]="true">
+
+        <input class="full-width"
+               placeholder="{{ 'placeholders.shortOfferDescription' | translate }}"
+               [id]="offerFields.offerDescription"
+               formControlName="{{offerFields.offerDescription}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.offerSummary"
+                     [control]="form.get(offerFields.offerSummary)"
+                     [tooltipLabel]="'A descriptive summary of the offer for internal use. Consumers will not see this.'"
+                     [alignItems]="'flex-start'"
+                     [required]="true">
+
+        <textarea class="full-width"
+                  placeholder="{{ 'placeholders.productDescription' | translate }}"
+                  [id]="offerFields.offerSummary"
+                  formControlName="{{offerFields.offerSummary}}">
+        </textarea>
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.productImage"
+                     [control]="form.get(offerFields.productImage)"
+                     [tooltipLabel]="'Upload of the product image for display on the Coupon.'"
+                     [required]="true">
+
+        <fp-image-uploader (imageUploaded)="productImageUploaded($event)"
+                           (imageMaxSizeExceed)="productImageMaxSizeExceed()"></fp-image-uploader>
+        <span class="form-section__separator"></span>
+
+        <input class="full-width"
+               placeholder="{{ 'placeholders.urlOfImage' | translate }}"
+               [readonly]="true"
+               formControlName="{{offerFields.productImage}}">
+    </fp-form-control>
+</div>

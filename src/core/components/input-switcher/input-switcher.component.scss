@@ -1,0 +1,67 @@
+@import "../../scss/vars";
+
+.switcher {
+    position: relative;
+
+    .switcher__content {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+        overflow: hidden;
+        transition: 0.3s;
+        box-sizing: border-box;
+        background: $white;
+        border: 1px solid $dusty-gray;
+        border-radius: 100px;
+        cursor: pointer;
+
+        &.active {
+            .switcher__inside {
+                transform: translateX(0);
+
+                .switcher__circle {
+                    left: 22px;
+                    background: $brand-blue;
+                    border: 1px solid $brand-blue;
+                }
+            }
+        }
+    }
+
+    .switcher__inside {
+        position: absolute;
+        left: 0;
+        width: 80px;
+        height: 18px;
+        font-size: 8px;
+        font-weight: 700;
+        color: $secondary-text-color;
+        border-radius: 100px;
+        text-transform: uppercase;
+        transform: translateX(-50%);
+        transition: .2s;
+
+        .switcher__yes,
+        .switcher__no {
+            position: absolute;
+            top: 50%;
+            transition: .2s;
+            transform: translateY(-50%);
+        }
+        .switcher__yes { left: 6px; }
+        .switcher__no { right: 10px; }
+
+        .switcher__circle {
+            position: absolute;
+            top: 50%;
+            left: 42px;
+            width: 14px;
+            height: 14px;
+            background: $white;
+            border: 1px solid $dusty-gray;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+    }
+}

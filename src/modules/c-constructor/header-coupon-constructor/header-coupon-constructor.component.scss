@@ -1,0 +1,47 @@
+@import '../../../core/scss/vars';
+
+.additional-header_construct {
+    .form-section {
+        padding-bottom: 0;
+    }
+
+    .form-section__label {
+        margin-right: 12px;
+        width: auto;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .additional-header__wrapper-title {
+        flex: 1 1 50%;
+    }
+
+    .additional-header__title {
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    .form-section__select {
+        max-width: 134px;
+        min-width: 134px;
+    }
+}
+
+.marketing-program {
+    display: flex;
+    flex: 1 1 50%;
+    margin-left: 24px;
+    justify-content: space-between;
+}
+
+.construct-header__content {
+    display: flex;
+    margin: 0 auto;
+    padding: 0 50px;
+    width: $content-width;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -1,0 +1,60 @@
+<h3>
+    <span [fpTooltip]="'Vivamus sagittis lacus'">
+        Publish Coupon
+    </span>
+</h3>
+
+<div class="publish-coupon" [class.publish-error]="isCurrentFormInvalid()">
+    <div class="publish-coupon__info">
+        <div class="info-item info-item__status">
+            <span class="info-item__title" [fpTooltip]="'Offer status. Only “Active” offers are valid for display to consumers.'">
+                <i class="icon-ic-status"></i>Status:
+            </span>
+            <span [translate]="'offer.statuses.' + getStatus()"></span>
+        </div>
+        <div class="info-item">
+            <span class="info-item__title" [fpTooltip]="'Time of the most recent change to any offer field.'">
+                <i class="icon-ic-time"></i>Last Modified Timestamp:
+            </span>
+            <span *ngIf="isTimeStampDate()">
+                {{ timeStamp | amDateFormat: timeStampFormat }}
+            </span>
+            <span *ngIf="!isTimeStampDate()">
+                {{ timeStamp }}
+            </span>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn btn-outline-delete"
+                [disabled]="isDeleteDisabled()"
+                (click)="deleteOffer()">
+            <span [translate]="'buttons.delete'"></span>
+        </button>
+        <button class="btn btn-outline-delete"
+                [disabled]="isDisableDisabled()"
+                (click)="disableOffer()">
+            <span [translate]="'buttons.disable'"></span>
+        </button>
+        <div>
+            <button class="btn btn-outline-blue coupon-save-btn"
+                    [disabled]="isSaveDraftDisabled()"
+                    (click)="saveDraft()">
+                <span [translate]="'buttons.saveDraft'"></span>
+            </button>
+
+            <div class="error-message-wrap">
+                <button class="btn btn-primary btn-publish"
+                        type="submit"
+                        [disabled]="isPublishDisabled()"
+                        (click)="publishOffer()">
+                    <span [translate]="'buttons.publish'"></span>
+                </button>
+
+                <span class="publish-error__message"
+                      *ngIf="isCurrentFormInvalid()"
+                      [translate]="'offer.errors.publishRequired'"></span>
+            </div>
+        </div>
+    </div>
+</div>

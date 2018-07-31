@@ -1,0 +1,182 @@
+<div class="form-constructor__distribution" [formGroup]="form">
+
+    <fp-form-control [label]="offerFields.expiry"
+                     [tooltipLabel]="'The expiration type for the offer.'">
+
+        <span class="expiries" *ngFor="let expiry of expiries">
+            <input id="form-expiry-{{expiry}}"
+                   type="radio"
+                   [value]="expiry"
+                   formControlName="{{offerFields.expiry}}"
+                   (click)="resetMandatoryField(expiry)"
+                   (inputFieldChanged)="onValidityExpiryChanged($event)">
+             <label class="radio" for="form-expiry-{{expiry}}">
+                 {{ expiry }}
+             </label>
+        </span>
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.validityStart"
+                     [control]="form.get(offerFields.validityStart)"
+                     [tooltipLabel]="'The date before which the offer must not be visible to new consumers or available for new reservations.'"
+                     [required]="true">
+
+        <my-date-picker class="date-picker {{dpStartOpen ? 'date-picker-open' : ''}}"
+                        placeholder="{{ dpStartOpen ? ('placeholders.startDateHeader' | translate) : ('placeholders.startDate' | translate) }}"
+                        formControlName="{{offerFields.validityStart}}"
+                        [options]="validityStartDatePickerOptions"
+                        (calendarToggle)="calendarStartToggle($event)"
+                        (inputFieldChanged)="onValidityStartChanged($event)">
+        </my-date-picker>
+
+        <input class="small"
+               [value]="startTime"
+               [hidden]="true"
+               formControlName="{{offerFields.validityStartTime}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.validityEnd"
+                     [control]="form.get(offerFields.validityEnd)"
+                     [tooltipLabel]="'The date after which the offer must no longer be visible to new consumers or available for new reservations.'"
+                     [required]="true">
+
+        <my-date-picker class="date-picker {{dpEndOpen ? 'date-picker-open' : ''}}"
+                        placeholder="{{ dpEndOpen ? ('placeholders.endDateHeader' | translate) : ('placeholders.endDate' | translate) }}"
+                        [options]="validityEndDatePickerOptions"
+                        formControlName="{{offerFields.validityEnd}}"
+                        (calendarToggle)="calendarEndToggle($event)"
+                        (inputFieldChanged)="onValidityEndChanged($event)">
+        </my-date-picker>
+
+        <input class="small"
+               [value]="endTime"
+               [hidden]="true"
+               formControlName="{{offerFields.validityEndTime}}">
+    </fp-form-control>
+
+    <fp-form-control *ngIf="isExpirySet()"
+                     [label]="offerFields.fixedExpiryDate"
+                     [control]="form.get(offerFields.fixedExpiryDate)"
+                     [tooltipLabel]="'The date before which the consumer must make an eligible purchase to which the offer applies. Purchase maybe made up to and including this date.'"
+                     [required]="true">
+
+        <my-date-picker class="date-picker {{dpExpiryOpen ? 'date-picker-open' : ''}}"
+                        placeholder="{{ dpExpiryOpen ? ('placeholders.expiryDateHeader' | translate) : ('placeholders.startDate' | translate) }}"
+                        [options]="expiryDatePickerOptions"
+                        formControlName="{{offerFields.fixedExpiryDate}}"
+                        (calendarToggle)="calendarExpiryToggle($event)"
+                        (inputFieldChanged)="onValidityExpiryChanged($event)">
+        </my-date-picker>
+    </fp-form-control>
+
+    <fp-form-control *ngIf="isRollingSet()"
+                     [label]="offerFields.rollingExpiryDays"
+                     [control]="form.get(offerFields.rollingExpiryDays)"
+                     [tooltipLabel]="'The number of days after the offer is reserved within which the consumer must make an eligible purchase to which the offer applies, set per Marketing Channel. Purchase maybe made up to and including this date.'"
+                     [required]="true">
+
+        <input placeholder="{{ 'placeholders.enterNumber' | translate }}"
+               [id]="offerFields.rollingExpiryDays"
+               [textMask]="{mask: onlyNumberMask}"
+               formControlName="{{offerFields.rollingExpiryDays}}">
+    </fp-form-control>
+
+    <fp-input-switcher
+        [label]="offerFields.targeted"
+        [fpTooltipText]="'Indicates whether the offer is restricted to a set of Consumer Segments.'"
+        formControlName="{{offerFields.targeted}}"
+        (click)="switchTargeted()">
+    </fp-input-switcher>
+
+    <fp-form-control *ngIf="isTargeted()"
+                     [label]="offerFields.targetConsumerSegments"
+                     [control]="form.get(offerFields.targetConsumerSegments)"
+                     [tooltipLabel]="'A list of one or more Segment IDs to which the offer should be made available.'"
+                     [required]="true">
+
+        <fp-multiple-select *ngIf="consumerSegments"
+                            [data]="consumerSegments"
+                            [optionKey]="'id'"
+                            [optionName]="'name'"
+                            placeholder="{{'placeholders.enterSegment' | translate}}"
+                            formControlName="{{offerFields.targetConsumerSegments}}">
+        </fp-multiple-select>
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.subdays"
+                     [control]="form.get(offerFields.subdays)"
+                     [tooltipLabel]="'The number of days following offer expiry within which a consumer must submit a redemption request, set per Marketing Channel.'"
+                     [required]="true">
+
+        <input [readonly]="true"
+               formControlName="{{offerFields.subdays}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.distributionQuantity"
+                     [control]="form.get(offerFields.distributionQuantity)"
+                     [tooltipLabel]="'The maximum number of activations permitted on an offer. Only integers allowed.'"
+                     [required]="true">
+
+        <input placeholder="{{'placeholders.enterLimit' | translate}}"
+               [id]="offerFields.distributionQuantity"
+               [textMask]="{mask: onlyNumberMask}"
+               formControlName="{{offerFields.distributionQuantity}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.redemptionRate"
+                     [control]="form.get(offerFields.redemptionRate)"
+                     [tooltipLabel]="'Estimated Redemption Rate in decimal points. For example, 75% would be input as 0.75.'"
+                     [required]="true">
+
+        <input [textMask]="textMask"
+               placeholder="{{ 'placeholders.enterDecimal' | translate }}"
+               formControlName="{{offerFields.redemptionRate}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.budgetName"
+                     [control]="form.get(offerFields.budgetName)"
+                     [tooltipLabel]="'The name of the budget owner.'"
+                     [required]="true">
+
+        <input placeholder="{{'placeholders.budgetName' | translate}}"
+               [id]="offerFields.budgetName"
+               formControlName="{{offerFields.budgetName}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.budgetIONumber"
+                     [control]="form.get(offerFields.budgetIONumber)"
+                     [tooltipLabel]="'The budget IO number.'"
+                     [required]="true">
+
+        <input placeholder="{{'placeholders.BudgetIO' | translate}}"
+               [id]="offerFields.budgetIONumber"
+               formControlName="{{offerFields.budgetIONumber}}">
+    </fp-form-control>
+
+    <fp-form-control [label]="offerFields.requiredPurchaseQuantity"
+                     [control]="form.get(offerFields.requiredPurchaseQuantity)"
+                     [tooltipLabel]="'The quantity of items required to be purchased from among the list of required products in order to redeem the offer. For example, for “Buy 2 and Save”, this value should be 2.'"
+                     [required]="true">
+
+        <input placeholder="{{'placeholders.enterNumber' | translate}}"
+               [id]="offerFields.requiredPurchaseQuantity"
+               [textMask]="{mask: onlyNumberMask}"
+               [readonly]="true"
+               formControlName="{{offerFields.requiredPurchaseQuantity}}">
+    </fp-form-control>
+
+    <fp-product-selector [form]="form">
+        <fp-form-control [label]="'requiredPurchase'"
+                         [alignItems]="'flex-start'"
+                         [required]="true"
+                         [tooltipLabel]="'A complete list of GTINs (UPCs, EANs) among which a purchase should be made in order to redeem the offer.'">
+
+            <textarea [readonly]="true"
+                      class="full-width"
+                      placeholder="{{'placeholders.productsList' | translate}}"
+                      formControlName="{{offerFields.purchaseGtins}}">
+            </textarea>
+        </fp-form-control>
+    </fp-product-selector>
+
+</div>

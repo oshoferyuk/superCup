@@ -1,0 +1,15 @@
+<div class="form-section switcher">
+    <span *ngIf="label" class="form-section__label">
+        <span [fpTooltip]="fpTooltipText">
+            {{ 'labels.' + label | translate }}
+        </span>
+    </span>
+
+    <div class="switcher__content" (click)="setSwitchState()" [class.active]="value">
+        <span class="switcher__inside">
+            <span class="switcher__yes">yes</span>
+            <span class="switcher__no">no</span>
+            <span class="switcher__circle"></span>
+        </span>
+    </div>
+</div>

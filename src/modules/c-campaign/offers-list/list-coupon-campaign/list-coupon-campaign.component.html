@@ -1,0 +1,9 @@
+<div class="main-content">
+    <fp-tabs-coupon-campaign (clickFiltersButton)="toggleShowFilters($event)"></fp-tabs-coupon-campaign>
+
+    <fp-filter-coupon-campaign [ngClass]="{'hidden':!isExpanded}"></fp-filter-coupon-campaign>
+
+    <fp-table-coupon-campaign ></fp-table-coupon-campaign>
+
+    <fp-pagination-coupon-campaign></fp-pagination-coupon-campaign>
+</div>

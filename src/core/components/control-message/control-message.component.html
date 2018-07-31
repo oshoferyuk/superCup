@@ -1,0 +1,5 @@
+<ul class="control-message" *ngIf="isHasError()">
+    <li class="control-message__item" *ngFor="let errMessage of controlMessages">
+        {{errMessage}}
+    </li>
+</ul>

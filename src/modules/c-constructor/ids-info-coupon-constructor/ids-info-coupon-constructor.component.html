@@ -1,0 +1,19 @@
+<div class="ids-info">
+    <div class="info-item info-item__offer-id">
+        <span class="info-item__title" [fpTooltip]="'The unique Flipp ID for the offer.'">
+            Offer ID
+        </span>
+        {{getId()}}
+    </div>
+    <div class="info-item">
+        <span class="info-item__title" [fpTooltip]="'P&G Incentive ID provided by 1CP.'">
+            P&G Incentive ID
+        </span>
+        {{getIncentiveId()}}
+    </div>
+
+    <div class="info-hints">
+        <span class="info-hints__title">Show hints <i class="icon-ic-question-big-lines"></i></span>
+        <i class="info-hints__aside">Hover to show hints</i>
+    </div>
+</div>
